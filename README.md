@@ -51,6 +51,17 @@ PuantajGir, personel giriş-çıkış saatlerini kolayca kaydeden hafif bir Andr
 5. Son gönderim tarihi ve durumu ekranda gösterilir.
 
 ---
+## 📷 Ekran Görüntüleri
+
+### Ana Ekran
+![Ana Ekran](app/images/screen/AnaEkran.png)
+
+### Tarih Seçimi
+![Tarih Seçimi](app/images/screen/TarihSecimi.png)
+
+### Saat Seçimi
+![Saat Seçimi](app/images/screen/SaatSec.png)
+
 
 ## 📤 Google Apps Script (Örnek Kod)
 
