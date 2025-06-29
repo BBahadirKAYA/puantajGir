@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">PuantajGir</string>
-    <string name="adiniz">Adınız</string>
-    <string name="gonder">Gönder</string>
+    <string name="app_name">Puantaj Giriş</string>
+    <string name="hint_personel_id">Personel ID</string>
+    <string name="btn_kaydet">ID Kaydet</string>
+    <string name="btn_giris">GİRİŞ</string>
+    <string name="btn_cikis">ÇIKIŞ</string>
+    <string name="desc_kayit_onay">Kayıt Başarılı İkonu</string>
 </resources>
