@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PuantajGir</string>
+    <string name="adiniz">Adınız</string>
+    <string name="gonder">Gönder</string>
+</resources>
