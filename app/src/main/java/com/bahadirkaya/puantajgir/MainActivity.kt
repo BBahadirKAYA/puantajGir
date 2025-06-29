@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -66,13 +68,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun veriGonder(id: String, durum: String) {
-        val url = "https://script.google.com/macros/s/AKfycbxeknRqNq-JFaWpC7MJGJgaGKGWtoYQNNWfTA8M5neCg_ZeeMZnawq5jQC_A-orH9H0lA/exec"
-        val tarihSaat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+    private fun veriGonder(personelID: String, durum: String) {
+        val tarih = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+        val url= "https://script.google.com/macros/s/AKfycbxeknRqNq-JFaWpC7MJGJgaGKGWtoYQNNWfTA8M5neCg_ZeeMZnawq5jQC_A-orH9H0lA/exec"
+
 
         val formBody = FormBody.Builder()
-            .add("personelID", id)
-            .add("tarihSaat", tarihSaat)
+            .add("personelID", personelID)
+            .add("tarih", tarih)
             .add("durum", durum)
             .build()
 
@@ -91,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val cevap = response.body?.string()
                 runOnUiThread {
-                    Toast.makeText(this@MainActivity, "Sunucu cevabı: $cevap", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "Sunucu: $cevap", Toast.LENGTH_LONG).show()
                 }
             }
         })
