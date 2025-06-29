@@ -2,6 +2,7 @@ package com.bahadirkaya.puantajgir
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.*
@@ -23,10 +24,16 @@ class MainActivity : AppCompatActivity() {
         val btnGiris = findViewById<Button>(R.id.btnGiris)
         val btnCikis = findViewById<Button>(R.id.btnCikis)
 
-        // Kaydedilen ID varsa göster
         val sharedPref = getSharedPreferences("PREF", Context.MODE_PRIVATE)
         val savedID = sharedPref.getString(sharedPrefKey, "")
-        editTextPersonelID.setText(savedID)
+
+        if (!savedID.isNullOrEmpty()) {
+            editTextPersonelID.visibility = View.GONE
+            btnKaydetID.visibility = View.GONE
+        } else {
+            editTextPersonelID.visibility = View.VISIBLE
+            btnKaydetID.visibility = View.VISIBLE
+        }
 
         // ID Kaydet
         btnKaydetID.setOnClickListener {
@@ -34,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             if (id.isNotEmpty()) {
                 sharedPref.edit().putString(sharedPrefKey, id).apply()
                 Toast.makeText(this, "Personel ID kaydedildi", Toast.LENGTH_SHORT).show()
+
+                // ID kaydedildikten sonra gizle
+                editTextPersonelID.visibility = View.GONE
+                btnKaydetID.visibility = View.GONE
             } else {
                 Toast.makeText(this, "ID boş olamaz", Toast.LENGTH_SHORT).show()
             }
@@ -45,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             if (id != null) {
                 veriGonder(id, "GİRİŞ")
             } else {
-                Toast.makeText(this, "Önce Personel ID girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Lütfen önce ID girin", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -55,19 +66,18 @@ class MainActivity : AppCompatActivity() {
             if (id != null) {
                 veriGonder(id, "ÇIKIŞ")
             } else {
-                Toast.makeText(this, "Önce Personel ID girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Lütfen önce ID girin", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun veriGonder(personelID: String, durum: String) {
-        val tarih = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
-       val url= "https://script.google.com/macros/s/AKfycbxeknRqNq-JFaWpC7MJGJgaGKGWtoYQNNWfTA8M5neCg_ZeeMZnawq5jQC_A-orH9H0lA/exec"
-
+    private fun veriGonder(id: String, durum: String) {
+        val url = "https://script.google.com/macros/s/AKfycbxeknRqNq-JFaWpC7MJGJgaGKGWtoYQNNWfTA8M5neCg_ZeeMZnawq5jQC_A-orH9H0lA/exec"
+        val tarihSaat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
         val formBody = FormBody.Builder()
-            .add("personelID", personelID)
-            .add("tarih", tarih)
+            .add("personelID", id)
+            .add("tarihSaat", tarihSaat)
             .add("durum", durum)
             .build()
 
@@ -86,9 +96,8 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val cevap = response.body?.string()
                 runOnUiThread {
-                    Toast.makeText(this@MainActivity, "Sunucu: $cevap", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "Sunucu cevabı: $cevap", Toast.LENGTH_LONG).show()
                 }
             }
         })
     }
-}
