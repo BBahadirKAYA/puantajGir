@@ -27,46 +27,41 @@ class MainActivity : AppCompatActivity() {
         val sharedPref = getSharedPreferences("PREF", Context.MODE_PRIVATE)
         val savedID = sharedPref.getString(sharedPrefKey, "")
 
+        // ID kaydedildiyse ID giriş alanlarını gizle
         if (!savedID.isNullOrEmpty()) {
             editTextPersonelID.visibility = View.GONE
             btnKaydetID.visibility = View.GONE
         } else {
-            editTextPersonelID.visibility = View.VISIBLE
-            btnKaydetID.visibility = View.VISIBLE
-        }
-
-        // ID Kaydet
-        btnKaydetID.setOnClickListener {
-            val id = editTextPersonelID.text.toString().trim()
-            if (id.isNotEmpty()) {
-                sharedPref.edit().putString(sharedPrefKey, id).apply()
-                Toast.makeText(this, "Personel ID kaydedildi", Toast.LENGTH_SHORT).show()
-
-                // ID kaydedildikten sonra gizle
-                editTextPersonelID.visibility = View.GONE
-                btnKaydetID.visibility = View.GONE
-            } else {
-                Toast.makeText(this, "ID boş olamaz", Toast.LENGTH_SHORT).show()
+            btnKaydetID.setOnClickListener {
+                val id = editTextPersonelID.text.toString().trim()
+                if (id.isNotEmpty()) {
+                    sharedPref.edit().putString(sharedPrefKey, id).apply()
+                    Toast.makeText(this, "Personel ID kaydedildi", Toast.LENGTH_SHORT).show()
+                    editTextPersonelID.visibility = View.GONE
+                    btnKaydetID.visibility = View.GONE
+                } else {
+                    Toast.makeText(this, "ID boş olamaz", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
-        // Giriş Kaydı Gönder
+        // Giriş butonu
         btnGiris.setOnClickListener {
             val id = sharedPref.getString(sharedPrefKey, null)
             if (id != null) {
                 veriGonder(id, "GİRİŞ")
             } else {
-                Toast.makeText(this, "Lütfen önce ID girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Personel ID bulunamadı", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Çıkış Kaydı Gönder
+        // Çıkış butonu
         btnCikis.setOnClickListener {
             val id = sharedPref.getString(sharedPrefKey, null)
             if (id != null) {
                 veriGonder(id, "ÇIKIŞ")
             } else {
-                Toast.makeText(this, "Lütfen önce ID girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Personel ID bulunamadı", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -101,3 +96,4 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+}
