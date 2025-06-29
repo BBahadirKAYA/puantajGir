@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_personel_id"
-        android:autofillHints="Personel İD" />
+        android:autofillHints="Personel ID" />
 
 
     <!-- Kaydet Butonu -->
