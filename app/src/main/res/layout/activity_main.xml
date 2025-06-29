@@ -3,37 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-    <!-- Personel ID Giriş Alanı -->
+    <!-- Başlık -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puantaj Giriş"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Personel ID Giriş -->
     <EditText
         android:id="@+id/editTextPersonelID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Personel ID"
-        android:inputType="number" />
+        android:inputType="number"
+        android:layout_marginBottom="16dp" />
 
-    <!-- Kaydet Butonu (Bir kez giriş için) -->
+    <!-- Kaydet Butonu -->
     <Button
         android:id="@+id/btnKaydetID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ID Kaydet"
-        android:layout_marginTop="16dp" />
+        android:layout_marginBottom="32dp" />
 
-    <!-- GİRİŞ Butonu -->
+    <!-- Giriş -->
     <Button
         android:id="@+id/btnGiris"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="GİRİŞ"
-        android:layout_marginTop="32dp" />
+        android:layout_marginBottom="16dp" />
 
-    <!-- ÇIKIŞ Butonu -->
+    <!-- Çıkış -->
     <Button
         android:id="@+id/btnCikis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ÇIKIŞ"
-        android:layout_marginTop="16dp" />
+        android:text="ÇIKIŞ" />
+    <!-- Kayıt Başarılı İkonu -->
+    <ImageView
+        android:id="@+id/imageOnay"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:src="@android:drawable/checkbox_on_background"
+        android:visibility="gone" />
+
 </LinearLayout>

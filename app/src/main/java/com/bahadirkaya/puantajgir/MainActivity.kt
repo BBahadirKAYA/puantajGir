@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         val btnKaydetID = findViewById<Button>(R.id.btnKaydetID)
         val btnGiris = findViewById<Button>(R.id.btnGiris)
         val btnCikis = findViewById<Button>(R.id.btnCikis)
+        val imageOnay = findViewById<ImageView>(R.id.imageOnay)
 
         val sharedPref = getSharedPreferences("PREF", Context.MODE_PRIVATE)
         val savedID = sharedPref.getString(sharedPrefKey, "")
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         btnGiris.setOnClickListener {
             val id = sharedPref.getString(sharedPrefKey, null)
             if (id != null) {
-                veriGonder(id, "GİRİŞ")
+                veriGonder(id, "GİRİŞ", imageOnay)
             } else {
                 Toast.makeText(this, "Personel ID bulunamadı", Toast.LENGTH_SHORT).show()
             }
@@ -61,17 +62,16 @@ class MainActivity : AppCompatActivity() {
         btnCikis.setOnClickListener {
             val id = sharedPref.getString(sharedPrefKey, null)
             if (id != null) {
-                veriGonder(id, "ÇIKIŞ")
+                veriGonder(id, "ÇIKIŞ", imageOnay)
             } else {
                 Toast.makeText(this, "Personel ID bulunamadı", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun veriGonder(personelID: String, durum: String) {
+    private fun veriGonder(personelID: String, durum: String, imageOnay: ImageView) {
         val tarih = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
-        val url= "https://script.google.com/macros/s/AKfycbxeknRqNq-JFaWpC7MJGJgaGKGWtoYQNNWfTA8M5neCg_ZeeMZnawq5jQC_A-orH9H0lA/exec"
-
+        val url = "https://script.google.com/macros/s/AKfycbxeknRqNq-JFaWpC7MJGJgaGKGWtoYQNNWfTA8M5neCg_ZeeMZnawq5jQC_A-orH9H0lA/exec"
 
         val formBody = FormBody.Builder()
             .add("personelID", personelID)
@@ -95,7 +95,10 @@ class MainActivity : AppCompatActivity() {
                 val cevap = response.body?.string()
                 runOnUiThread {
                     Toast.makeText(this@MainActivity, "Sunucu: $cevap", Toast.LENGTH_LONG).show()
+                    imageOnay.visibility = View.VISIBLE
+                    imageOnay.postDelayed({ imageOnay.visibility = View.GONE }, 2000)
                 }
+
             }
         })
     }
