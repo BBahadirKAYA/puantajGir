@@ -1,10 +1,12 @@
 package com.bahadirkaya.puantajgir
+
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.*
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val client = OkHttpClient()
     private val sharedPrefKey = "personel_id"
+    private lateinit var textSonGonderim: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +31,11 @@ class MainActivity : AppCompatActivity() {
         val btnGiris = findViewById<Button>(R.id.btnGiris)
         val btnCikis = findViewById<Button>(R.id.btnCikis)
         val imageOnay = findViewById<ImageView>(R.id.imageOnay)
+        textSonGonderim = findViewById(R.id.textSonGonderim)
 
         val sharedPref = getSharedPreferences("PREF", Context.MODE_PRIVATE)
         val savedID = sharedPref.getString(sharedPrefKey, "")
 
-        // ID kaydedildiyse ID giriş alanlarını gizle
         if (!savedID.isNullOrEmpty()) {
             editTextPersonelID.visibility = View.GONE
             btnKaydetID.visibility = View.GONE
@@ -53,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Giriş butonu
         btnGiris.setOnClickListener {
             val id = sharedPref.getString(sharedPrefKey, null)
             if (id != null) {
@@ -63,7 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Çıkış butonu
         btnCikis.setOnClickListener {
             val id = sharedPref.getString(sharedPrefKey, null)
             if (id != null) {
@@ -102,6 +103,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Sunucu: $cevap", Toast.LENGTH_LONG).show()
                     imageOnay.visibility = View.VISIBLE
                     imageOnay.postDelayed({ imageOnay.visibility = View.GONE }, 2000)
+                    textSonGonderim.text = "Son gönderim: $tarih ($durum)"
                 }
             }
         })
