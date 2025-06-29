@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-    <EditText
-        android:id="@+id/editTextAd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/adiniz"
-        android:inputType="textPersonName"
-        android:autofillHints="name" />
+    android:padding="24dp"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnGonder"
+    <!-- Personel ID Giriş Alanı -->
+    <EditText
+        android:id="@+id/editTextPersonelID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/gonder"
-        android:layout_marginTop="16dp"/>
+        android:hint="Personel ID"
+        android:inputType="number" />
+
+    <!-- Kaydet Butonu (Bir kez giriş için) -->
+    <Button
+        android:id="@+id/btnKaydetID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID Kaydet"
+        android:layout_marginTop="16dp" />
+
+    <!-- GİRİŞ Butonu -->
+    <Button
+        android:id="@+id/btnGiris"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GİRİŞ"
+        android:layout_marginTop="32dp" />
+
+    <!-- ÇIKIŞ Butonu -->
+    <Button
+        android:id="@+id/btnCikis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ÇIKIŞ"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
