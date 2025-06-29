@@ -4,5 +4,18 @@
     <string name="btn_kaydet">ID Kaydet</string>
     <string name="btn_giris">GİRİŞ</string>
     <string name="btn_cikis">ÇIKIŞ</string>
-    <string name="desc_kayit_onay">Kayıt Başarılı İkonu</string>
+    <string name="desc_kayit_onay">Kayıt başarıyla gönderildi</string>
+    <string name="btn_tarih_saat_sec">Tarih &amp; Saat Seç</string>
+    <string name="son_gonderim">Son Gönderim: %1$s (%2$s)</string>
+    <string name="personel_id_kaydedildi">Personel ID kaydedildi</string>
+    <string name="id_bos_olamaz">ID boş olamaz</string>
+    <string name="personel_id_bulunamadi">Personel ID bulunamadı</string>
+    <string name="hata">Hata: %1$s</string>
+    <string name="sunucu_cevap">Sunucu: %1$s</string>
+    <string name="secilen_tarih">Seçilen Tarih: %1$s</string>
+    <string name="su_an">Şu an</string>
+    <string name="hint_aciklama">Açıklama</string>
+
+
 </resources>
+

@@ -61,6 +61,28 @@
         android:layout_height="wrap_content"
         android:text=""
         android:layout_marginTop="16dp" />
+    <Button
+        android:id="@+id/btnTarihSec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_tarih_saat_sec"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textSecilenTarih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seçilen Tarih: Şu an"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/editTextAciklama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_aciklama"
+        android:inputType="textMultiLine"
+        android:minLines="2"
+        android:layout_marginTop="16dp"/>
 
 
 </LinearLayout>
