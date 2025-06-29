@@ -1,35 +1,67 @@
-# PuantajGir Android Uygulaması
+# 📱 PuantajGir - Android Personel Giriş/Çıkış Uygulaması
 
-Bu uygulama, personel puantaj bilgilerini Android cihazdan doğrudan Google Sheets'e göndermek için geliştirilmiştir.
+PuantajGir, personel giriş-çıkış saatlerini kolayca kaydeden hafif bir Android uygulamasıdır. Kayıtlar, Google Sheets üzerinden bir Google Apps Script Web App'e gönderilir.
 
-## 📱 Özellikler
+---
 
-- Kullanıcı adı girişiyle puantaj kaydı
-- Otomatik tarih ekleme
-- İnternete bağlı olarak Google Apps Script üzerinden veri gönderimi
-- Basit ve kullanıcı dostu arayüz
-- OkHttp kütüphanesiyle arka planda veri iletimi
+## 🚀 Özellikler
 
-## 🛠 Kullanılan Teknolojiler
+- ✅ Personel ID ile kayıt
+- 🕒 Giriş / Çıkış zamanı kaydı
+- 🌐 Google Apps Script entegrasyonu (form post)
+- 📅 Gönderim tarihi ve durumu gösterimi
+- ✔️ Başarılı kayıt sonrası animasyonlu onay simgesi
 
-- **Android Studio**
-- **Kotlin**
-- **Google Sheets + Apps Script**
-- **OkHttp 4.12.0**
+---
 
-## 📤 Veri Gönderimi
+## 🧩 Kullanılan Teknolojiler
 
-Uygulama aşağıdaki bilgileri gönderir:
+- Android (Kotlin)
+- OkHttp (veri gönderimi)
+- Google Apps Script (backend)
+- SharedPreferences (yerel ID saklama)
 
-| Alan Adı   | Açıklama                |
-|------------|-------------------------|
-| `AdSoyad`  | Kullanıcının adı        |
-| `Tarih`    | Güncel tarih (yyyy-MM-dd) |
-| `Durum`    | (Geliştirilebilir)      |
-| `Aciklama` | (Geliştirilebilir)      |
+---
 
-## 🚀 Kurulum
+## 📂 Dosya Yapısı
 
-1. Bu repoyu klonlayın:
-   ```bash
-   git clone https://github.com/BBahadirKAYA/puantajGir.git
+| Dosya | Açıklama |
+|-------|----------|
+| `MainActivity.kt` | Uygulamanın ana mantığını barındırır (ID girişi, veri gönderimi, Toast mesajları vb.) |
+| `activity_main.xml` | Giriş, çıkış, ID kaydetme ve onay simgesinin UI tasarımı |
+| `strings.xml` | Uygulamadaki metinlerin merkezi tanımı |
+| `AndroidManifest.xml` | Uygulama izinleri ve başlangıç aktivitesi tanımı |
+
+---
+
+## ⚙️ Kurulum
+
+1. Android Studio ile projeyi açın.
+2. `MainActivity.kt` içindeki `url` değişkenine kendi Web App URL’nizi girin.
+3. APK'yı oluşturun ve cihazınıza yükleyin.
+
+---
+
+## 🔐 Uygulama Akışı
+
+1. Kullanıcı ilk girişte **Personel ID**'sini girer ve kaydeder.
+2. Uygulama, ID'yi `SharedPreferences` ile saklar ve ID giriş alanlarını gizler.
+3. Kullanıcı **GİRİŞ** veya **ÇIKIŞ** butonuna tıkladığında, ID + tarih + durum bilgilerinden oluşan bir form Google Apps Script’e gönderilir.
+4. Sunucu dönüş mesajı ekranda gösterilir ve onay simgesi kısa süreyle belirir.
+5. Son gönderim tarihi ve durumu ekranda gösterilir.
+
+---
+
+## 📤 Google Apps Script (Örnek Kod)
+
+```javascript
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("PuantajKayıtları");
+  var id = e.parameter.personelID;
+  var tarih = e.parameter.tarih;
+  var durum = e.parameter.durum;
+
+  sheet.appendRow([id, tarih, durum]);
+
+  return ContentService.createTextOutput("Kayıt başarıyla eklendi.");
+}
