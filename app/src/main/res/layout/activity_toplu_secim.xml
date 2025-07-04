@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <Button
+            android:id="@+id/btnTarihEkle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tarih Ekle" />
+
+        <ListView
+            android:id="@+id/listViewTarihler"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp" />
+
+        <Button
+            android:id="@+id/btnSaatSec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saat Seç" />
+
+        <TextView
+            android:id="@+id/textSaatSecim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="8dp"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/radioDurum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+            <RadioButton
+                android:id="@+id/radioGiris"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GİRİŞ"
+                android:checked="true" />
+            <RadioButton
+                android:id="@+id/radioCikis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ÇIKIŞ" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/editAciklamaToplu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Açıklama (isteğe bağlı)"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/btnGonder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gönder"
+            android:layout_marginTop="12dp" />
+    </LinearLayout>
+</ScrollView>

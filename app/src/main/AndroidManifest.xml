@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.bahadirkaya.puantajgir">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -16,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PuantajGir">
 
+        <!-- ANA EKRAN -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -24,6 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <!-- TOPLU SEÇİM EKRANI -->
+        <activity android:name=".TopluSecimActivity" />
+
+    </application>
 </manifest>

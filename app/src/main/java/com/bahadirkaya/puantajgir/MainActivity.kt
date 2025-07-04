@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textVersion: TextView
     private var secilenTarihSaat: Calendar? = null
 
-    private val webAppUrl = "https://script.google.com/macros/s/AKfycbydMav7Zo_alijXGEFWrDGl5nyeaGCdEIZ5YWhuMacf3CjiAHIbFmUs5sC9Uw7hMbx8/exec"
-    private val currentVersionCode = 4
-    private val currentVersionName = "0.4"
+    private val webAppUrl = "https://script.google.com/macros/s/AKfycbyJbYFJz0VjFAfy93gcwG7XoiAcTXv8tIJX76GaujhQ7_mbPDg8KhLSceqcMKguK5VVRg/exec"
+    private val currentVersionCode = 5
+    private val currentVersionName = "0.5"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         btnGiris = findViewById(R.id.btnGiris)
         btnCikis = findViewById(R.id.btnCikis)
         val btnTarihSec = findViewById<Button>(R.id.btnTarihSec)
+        val btnTopluSecim = findViewById<Button>(R.id.btnTopluSecim)
         val imageOnay = findViewById<ImageView>(R.id.imageOnay)
         textSonGonderim = findViewById(R.id.textSonGonderim)
         textSecilenTarih = findViewById(R.id.textSecilenTarih)
@@ -113,10 +114,15 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    checkForUpdate()
+
 
                 }, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true).show()
             }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
+        btnTopluSecim.setOnClickListener {
+            val intent = Intent(this, TopluSecimActivity::class.java)
+            startActivity(intent)
         }
 
         btnGiris.setOnClickListener {
@@ -137,9 +143,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        textSecilenTarih.setOnLongClickListener {
+            val now = Calendar.getInstance()
+            DatePickerDialog(this, { _, y, m, d ->
+                TimePickerDialog(this, { _, hour, minute ->
+                    secilenTarihSaat = Calendar.getInstance().apply {
+                        set(y, m, d, hour, minute)
+                    }
+                    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+                    val tarihStr = sdf.format(secilenTarihSaat!!.time)
+                    textSecilenTarih.text = getString(R.string.secilen_tarih, tarihStr)
+                    Toast.makeText(this, "Toplu seçim yapıldı", Toast.LENGTH_SHORT).show()
+                }, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true).show()
+            }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)).show()
+            true
+        }
+
         checkForUpdate()
     }
-
     private fun checkForUpdate() {
         val request = Request.Builder()
             .url(webAppUrl)
@@ -181,7 +202,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun veriGonder(personelID: String, durum: String, imageOnay: ImageView) {
         val tarih = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(secilenTarihSaat!!.time)
         val kayitTarihi = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
@@ -233,4 +253,5 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 }

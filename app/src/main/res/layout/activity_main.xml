@@ -93,4 +93,11 @@
         android:textSize="14sp"
         android:layout_marginTop="8dp"
         android:textColor="#888888"/>
+    <Button
+        android:id="@+id/btnTopluSecim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toplu Seçim"
+        android:layout_marginTop="16dp" />
+
 </LinearLayout>
