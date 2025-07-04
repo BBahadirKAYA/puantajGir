@@ -32,20 +32,7 @@
         android:text="@string/btn_kaydet" />
 
 
-    <!-- Giriş -->
-    <Button
-        android:id="@+id/btnGiris"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_giris" />
 
-
-    <!-- Çıkış -->
-    <Button
-        android:id="@+id/btnCikis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_cikis" />
     <!-- Kayıt Başarılı İkonu -->
     <ImageView
         android:id="@+id/imageOnay"
@@ -84,6 +71,26 @@
         android:inputType="textMultiLine"
         android:minLines="2"
         android:layout_marginTop="16dp"/>
+    <!-- Giriş -->
+    <Button
+        android:id="@+id/btnGiris"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_giris" />
 
 
+    <!-- Çıkış -->
+    <Button
+        android:id="@+id/btnCikis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_cikis" />
+    <TextView
+        android:id="@+id/textVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"/>
 </LinearLayout>
